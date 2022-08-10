@@ -5,13 +5,13 @@ include ':alfred-telemetry-platform'
 
 // Alfred Telemetry core module
 include ':alfred-telemetry-solr'
-["solr4", "solr6", "solr-common"].each { solrFlavor ->
+["solr6", "solr-common"].each { solrFlavor ->
     include ":alfred-telemetry-solr:alfred-telemetry-${solrFlavor}"
 }
 
 include ':integration-tests'
 
-def integrationTestVersions = ["52", "60", "61", "62", "70"];
+def integrationTestVersions = ["70"];
 
 if (!hasProperty("community")) {
     integrationTestVersions.each { version ->

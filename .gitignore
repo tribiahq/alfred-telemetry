@@ -7,3 +7,4 @@ out/
 alfresco.log
 **/*p6spy*
 **/*~
+bin/
