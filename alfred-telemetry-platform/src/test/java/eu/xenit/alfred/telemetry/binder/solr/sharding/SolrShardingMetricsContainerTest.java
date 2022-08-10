@@ -6,6 +6,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.alfresco.repo.index.shard.Floc;
 import org.alfresco.repo.index.shard.Shard;
 import org.alfresco.repo.index.shard.ShardRegistry;
@@ -32,7 +35,7 @@ class SolrShardingMetricsContainerTest {
     @Test
     void refresh() {
         Floc floc = new Floc();
-        HashMap<Floc, HashMap<Shard, HashSet<ShardState>>> flocs = new HashMap<>();
+        Map<Floc, Map<Shard, Set<ShardState>>> flocs = new HashMap<>();
         flocs.put(floc, new HashMap<>());
         when(shardRegistry.getFlocs()).thenReturn(flocs);
 

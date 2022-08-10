@@ -95,7 +95,7 @@ public class Hazelcast2CacheMetrics extends CacheMeterBinder {
 
     @Override
     protected long putCount() {
-        return cache.getLocalMapStats().getOperationStats().getNumberOfPuts();
+        return cache.getLocalMapStats().getPutOperationCount();
     }
 
     @Override
@@ -123,7 +123,7 @@ public class Hazelcast2CacheMetrics extends CacheMeterBinder {
                 .register(registry);
 
         FunctionCounter.builder("cache.partition.gets", cache,
-                c -> c.getLocalMapStats().getOperationStats().getNumberOfGets())
+                c -> c.getLocalMapStats().getGetOperationCount())
                 .tags(getTagsWithCacheName())
                 .description("The total number of get operations executed against this partition")
                 .register(registry);
@@ -134,24 +134,24 @@ public class Hazelcast2CacheMetrics extends CacheMeterBinder {
 
     private void timings(MeterRegistry registry) {
         FunctionTimer.builder(METER_CACHE_GETS_LATENCY, cache,
-                c -> c.getLocalMapStats().getOperationStats().getNumberOfGets(),
-                c -> c.getLocalMapStats().getOperationStats().getTotalGetLatency(),
+                c -> c.getLocalMapStats().getGetOperationCount(),
+                c -> c.getLocalMapStats().getTotalGetLatency(),
                 TimeUnit.NANOSECONDS)
                 .tags(getTagsWithCacheName())
                 .description("Cache gets")
                 .register(registry);
 
         FunctionTimer.builder(METER_CACHE_PUTS_LATENCY, cache,
-                c -> c.getLocalMapStats().getOperationStats().getNumberOfPuts(),
-                c -> c.getLocalMapStats().getOperationStats().getTotalPutLatency(),
+                c -> c.getLocalMapStats().getPutOperationCount(),
+                c -> c.getLocalMapStats().getTotalPutLatency(),
                 TimeUnit.NANOSECONDS)
                 .tags(getTagsWithCacheName())
                 .description("Cache puts")
                 .register(registry);
 
         FunctionTimer.builder(METER_CACHE_REMOVALS_LATENCY, cache,
-                c -> c.getLocalMapStats().getOperationStats().getNumberOfRemoves(),
-                c -> c.getLocalMapStats().getOperationStats().getTotalRemoveLatency(),
+                c -> c.getLocalMapStats().getRemoveOperationCount(),
+                c -> c.getLocalMapStats().getTotalRemoveLatency(),
                 TimeUnit.NANOSECONDS)
                 .tags(getTagsWithCacheName())
                 .description("Cache removals")

@@ -6,6 +6,8 @@ import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.alfresco.repo.index.shard.Floc;
 import org.alfresco.repo.index.shard.Shard;
@@ -37,9 +39,9 @@ class SolrShardingMetricsTest {
         shardState.setShardInstance(shardInstance);
         HashSet<ShardState> shardStates = new HashSet<>();
         shardStates.add(shardState);
-        HashMap<Shard, HashSet<ShardState>> shardHashSetHashMap = new HashMap<>();
+        Map<Shard, Set<ShardState>> shardHashSetHashMap = new HashMap<>();
         shardHashSetHashMap.put(shard, shardStates);
-        HashMap<Floc, HashMap<Shard, HashSet<ShardState>>> metricsInformation = new HashMap<>();
+        Map<Floc, Map<Shard, Set<ShardState>>> metricsInformation = new HashMap<>();
         metricsInformation.put(floc, shardHashSetHashMap);
 
         ShardRegistry shardRegistry = Mockito.mock(ShardRegistry.class);
@@ -67,9 +69,9 @@ class SolrShardingMetricsTest {
         shardInstance.setHostName("myInstanceHost");
         HashSet<ShardState> shardStates = new HashSet<>();
         shardStates.add(null);
-        HashMap<Shard, HashSet<ShardState>> shardHashSetHashMap = new HashMap<>();
+        Map<Shard, Set<ShardState>> shardHashSetHashMap = new HashMap<>();
         shardHashSetHashMap.put(shard, shardStates);
-        HashMap<Floc, HashMap<Shard, HashSet<ShardState>>> metricsInformation = new HashMap<>();
+        Map<Floc, Map<Shard, Set<ShardState>>> metricsInformation = new HashMap<>();
         metricsInformation.put(floc, shardHashSetHashMap);
         ShardRegistry shardRegistry = Mockito.mock(ShardRegistry.class);
         MeterRegistry meterRegistry = new SimpleMeterRegistry();
